@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Products</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #000000;
+        }
+        h1{
+            color: #ffffff;
+            font-size: 50px;
+            margin-top: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        hr{
+            border: 1px solid #ffffff;
+            width: 100%;
+        }
+        h4{
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #ffffff;
+
+        }
+        h2{
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Products</h1>
+    <hr>
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-5">
+                    <h2>{{product.name}}</h2>
+                    <h4>Price: ${{product.price}}</h4>
+                    {% if product.stars == 0 %}
+                        <h3>
+                            <span class="badge badge-danger">No reviews yet</span>
+                        </h3>
+                    {% else %}
+                        <h3>
+                            <span class="badge badge-success">{{product.stars}} stars</span>
+                        </h3>
+                    {% endif %}
+                    <button class="btn btn-primary">Buy</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

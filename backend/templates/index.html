@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap css and js -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #000000;
+        }
+        h1{
+            color: #ffffff;
+            font-size: 50px;
+            margin-top: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        hr{
+            border: 1px solid #ffffff;
+            width: 50%;
+        }
+        h4{
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        h2{
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        .form-control{
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .btn-primary{
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid #000000;
+            border-radius: 0px;
+            margin-left: 45%;
+            margin-bottom: 12px;
+        }
+        .btn-primary:hover{
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .btn-primary:focus{
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Get your prediction here...</h1>
+    <hr>
+    <form action="{% url 'predict' %}" method="POST">
+        <!-- User enters a review and click submit -->
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="review" style="color: #ffffff;">Enter your review here:</label>
+            <textarea class="form-control" id="review" name="review" rows="3" style="background-color: #000000; color: #ffffff;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    <h4 class="text-center" style="color: #ffffff;">
+        The result will be displayed here for 10 seconds
+        then it will be removed.
+    </h4>
+    <hr>
+    {% if prediction == 1 %}
+        <div class="text-center">
+            <h2 id="result" style="color: #ffffff;">Positive review {{stars}} </h2>
+        </div>
+    {% elif prediction == 0 %}
+        <div class="text-center">
+            <h2 id="result" style="color: #ffffff;">Negative review {{stars}} </h2>
+        </div>
+    {% endif %}
+
+
+    <script>
+        // The prediction result must be seen for 5 seconds
+        // then remove it
+        setTimeout(function(){
+            document.getElementById('result').remove();
+        }, 10000);
+    </script>
+</body>
+</html>
